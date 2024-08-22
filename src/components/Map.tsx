@@ -8,8 +8,8 @@ import * as GoogleMapTypes from "@/types/global-types";
 import { Autocomplete, GoogleMap, Marker } from "@react-google-maps/api";
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
-import { MdCall, MdRateReview, MdStar } from "react-icons/md";
 import ResturantCard from "./ResturantCard";
+import AutoCompleteDropDown from "./AutoCompleteDropDown";
 
 const MapComponent = () => {
   const [defaultMapCenter, setDefaultMapsCenter] =
@@ -103,7 +103,7 @@ const MapComponent = () => {
           phone: result.formatted_phone_number ?? "",
           website: result.website,
           reviews: result.reviews,
-          businessStatus:result.business_status??"N/A"
+          businessStatus: result.business_status ?? "N/A",
         }));
         setRestaurantsMapCenter(restaurantsData);
         toast.success("Restaurants have been marked successfully.");
@@ -122,7 +122,6 @@ const MapComponent = () => {
       setPlacesService(newPlacesService);
     }
   }, [mapRef.current]);
-  console.log(restaurantsMapCenter);
   return (
     <div className="w-full">
       <GoogleMap
@@ -135,24 +134,11 @@ const MapComponent = () => {
         }}
       >
         <Autocomplete onLoad={onLoad} onPlaceChanged={handlePlaceChange}>
-          <div className="absolute flex lg:mt-[20%] lg:ml-[40%] md:mt-[40%] md:ml-[20%] sm:mt-[40%] sm:ml-[20%] ml-[8%] mt-[40%] outline outline-green-600 rounded-md shadow-2xl shadow-black items-center bg-white overflow-hidden p-0">
-            <input
-              type="text"
-              name="autocomplete"
-              id="autocomplete"
-              placeholder="Enter Destination"
-              className="p-0 sm:p-2 lg:p-3 xl:p-3 w-52 sm:w-72 lg:w-96 z-10 outline-none overflow-hidden"
-            />
-            <button
-              onClick={getCurrentUserLocation}
-              className="p-1 bg-transparent"
-            >
-              <TbCurrentLocation size={20} color="green" />
-            </button>
-            <button className="bg-green-600 p-3" onClick={getRestaurantsList}>
-              Get Restaurants
-            </button>
-          </div>
+          <AutoCompleteDropDown
+            key={"autocomplete"}
+            getCurrentUserLocation={getCurrentUserLocation}
+            getRestaurantsList={getRestaurantsList}
+          />
         </Autocomplete>
         <Marker position={defaultMapCenter} />
         {restaurantsMapCenter.map((restaurant, index) => (
@@ -163,18 +149,20 @@ const MapComponent = () => {
           />
         ))}
       </GoogleMap>
-      <div className="restaurant-cards">
-        {restaurantsMapCenter.map((restaurant, index) => {
-          return <ResturantCard
-          placeId={restaurant.placeId}
-          business_status={restaurant.businessStatus}
-          open_now={restaurant.isOpen}
-            photoRefrence={restaurant.photos}
-            rating={restaurant.rating}
-            vicinity={restaurant.vicinity}
-             user_ratings_total={restaurant.userRatings}
-             restaurantName={restaurant.name}
-          />;
+      <div className="restaurant-cards flex flex-wrap gap-2 my-2 items-center justify-center">
+        {restaurantsMapCenter.map((restaurant) => {
+          return (
+            <ResturantCard
+              placeId={restaurant.placeId}
+              business_status={restaurant.businessStatus}
+              isOpen={restaurant.isOpen}
+              photoRefrence={restaurant.photos}
+              rating={restaurant.rating}
+              vicinity={restaurant.vicinity}
+              user_ratings_total={restaurant.userRatings}
+              restaurantName={restaurant.name}
+            />
+          );
         })}
       </div>
     </div>
