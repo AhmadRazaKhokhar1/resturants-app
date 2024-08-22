@@ -21,3 +21,12 @@
     text-wrap: balance;
   }
 }
+
+body::-webkit-scrollbar{
+  width: 7px;
+  background-color: rgb(173, 248, 198);
+}
+body::-webkit-scrollbar-thumb{
+  border-radius: 12px;
+  background: #2bff4e;;
+}

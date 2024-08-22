@@ -18,6 +18,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* <script
+          async
+          src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAP_API}&loading=async&callback=initMap`}
+        ></script> */}
+      </head>
       <body>
         <Navbar />
         <Toaster />
