@@ -13,7 +13,7 @@ export function MapProvider({ children }: { children: ReactNode }) {
 
   if (loadError) return <p>Encountered error while loading google maps</p>;
 
-  if (!scriptLoaded) return <p><div className="rounded-full w-12 h-12 b-l-2 border-blue-600 animate-spin"></div></p>;
+  if (!scriptLoaded) return <div className="rounded-full w-12 h-12 b-l-2 border-blue-600 animate-spin"></div>;
 
   return children;
 }

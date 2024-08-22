@@ -18,9 +18,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Navbar/>
-      <Toaster/>
-      <body>{children}</body>
+      <body>
+        <Navbar />
+        <Toaster />
+        {children}
+      </body>
     </html>
   );
 }
