@@ -31,15 +31,14 @@ const MapComponent = () => {
     useState<GoogleMapTypes.Autocomplete>(null);
   const mapRef = useRef<google.maps.Map>(null);
   const [placesService, setPlacesService] =
-    useState<google.maps.places.PlacesService | null>( 
-  );
+    useState<google.maps.places.PlacesService | null>(null);
 
   //handle auto complete
-  const onLoad = async (autoCompleteInstance: google.maps.places.Autocomplete) => {
+  const onLoad =  (autoCompleteInstance: google.maps.places.Autocomplete) => {
     setAutoComplete(autoCompleteInstance);
   };
-
-  const handlePlaceChange = async () => {
+  
+  const handlePlaceChange = () => {
     if (autoComplete) {
       const place = autoComplete.getPlace();
       if (place.geometry) {
@@ -48,8 +47,6 @@ const MapComponent = () => {
           lat: location.lat(),
           lng: location.lng(),
         });
-        const places = await google.maps.importLibrary('places');
-        setPlacesService(places)
       }
     }
   };
@@ -81,6 +78,9 @@ const MapComponent = () => {
   //getting all the restaurants
   const getRestaurantsList = async () => {
     try {
+      const places = await google.maps.importLibrary('places');
+      console.log(places)
+      setPlacesService(places.place.SearchNearBy())
       console.log(placesService)
       if (!placesService) {
         return;
@@ -93,10 +93,16 @@ const MapComponent = () => {
         radius: 5500,
         type: "restaurant",
       };
-      placesService.textSearch(query, (results, status) => {
+      placesService.nearbySearch(query, (results, status) => {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
           console.log("Results:", results); // Log results to debug
-          const restaurantsData = results?.map((result) => (console.log({result})));
+          const restaurantsData = results?.map((result) => ({
+            lat: result.geometry?.location?.lat() ?? 0,
+            lng: result.geometry?.location?.lng() ?? 0,
+            name: result.name ?? "Unknown",
+            rating: result.rating ?? null,
+            placeId: result.place_id ?? "",
+          }));
           setRestaurantsMapCenter((prevRestaurants)=>[...prevRestaurants, restaurantsData]);
           toast.success("The Restaurants are marked successfully");
         } else {
