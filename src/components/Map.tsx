@@ -30,8 +30,7 @@ const MapComponent = () => {
   const [autoComplete, setAutoComplete] =
     useState<GoogleMapTypes.Autocomplete>(null);
   const mapRef = useRef<google.maps.Map>(null);
-  const [placesService, setPlacesService] =
-    useState<google.maps.places.PlacesService | null>(null);
+  const [placesService, setPlacesService] = useState<google.maps.places.PlacesService | null>(null);
 
   //handle auto complete
   const onLoad =  (autoCompleteInstance: google.maps.places.Autocomplete) => {
@@ -78,9 +77,8 @@ const MapComponent = () => {
   //getting all the restaurants
   const getRestaurantsList = async () => {
     try {
-      const places = await google.maps.importLibrary('places');
-      console.log(places)
-      setPlacesService(places.place.SearchNearBy())
+      
+      // setPlacesService(Places.Place)
       console.log(placesService)
       if (!placesService) {
         return;
@@ -125,7 +123,14 @@ const MapComponent = () => {
         });
       });
     }
-  },[restaurantsMapCenter]);
+    async function setPlacesServiceFunc():Promise<void>{
+      const {Place} = await google.maps.importLibrary('places');
+      const PlaceNew = new Place;
+      console.log(PlaceNew)
+     await setPlacesService(PlaceNew)
+    }
+    setPlacesServiceFunc()
+  },[restaurantsMapCenter, placesService, getRestaurantsList]);
   console.log({restaurantsMapCenter})
   return (
     <div className="w-full">
