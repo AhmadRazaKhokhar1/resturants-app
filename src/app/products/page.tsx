@@ -4,8 +4,16 @@ import { GenerateSampleProducts } from "../globals/sample-products";
 import { SampleProductType } from "@/types/types";
 import { randomIndexGenerator } from "../globals/callbacks";
 import ProductCard from "@/components/ProductCard";
-export default function poducts() {
+export default function Products(searchParams:{ restaurantName:string,
+  vicinity:string,
+  user_ratings_total:number,
+  rating:number,
+  photoRefrence:number,
+  business_status:string,
+  placeId:string,
+}) {
   const [products, setProducts] = useState<SampleProductType[]>([]);
+  console.log({searchParams})
 
   useEffect(() => {
     let maxProducts = 50;
@@ -19,7 +27,7 @@ export default function poducts() {
   }, []);
 
   return (
-    <div>
+    <div className="self-center flex gap-2 flex-wrap items-center justify-center">
       {products.map((product, index) => {
         return (
           <ProductCard
