@@ -122,6 +122,7 @@ const MapComponent = () => {
       setPlacesService(newPlacesService);
     }
   }, [mapRef.current]);
+
   return (
     <div className="w-full">
       <GoogleMap
