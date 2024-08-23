@@ -4,7 +4,7 @@ import { Toaster } from "react-hot-toast";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Enatego",
+  title: "Enatega",
   description: "Created by Ahmad Raza Khokhar",
 };
 
