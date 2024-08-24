@@ -35,7 +35,11 @@ export default function ResturantCard({
         <div className="w-72 h-72 overflow-hidden justify-center">
           <img
             className="w-full h-full"
-            src={photoRefrence ?? product_placeholder}
+            src={photoRefrence}
+            onError={(e)=>{
+              e.target.onerror =null;
+              e.target.src = product_placeholder.src;
+            }}
             alt={restaurantName}
           />
         </div>
@@ -54,15 +58,17 @@ export default function ResturantCard({
           </div>
           <p className="text-sm text-gray-600 mb-2">{vicinity}</p>
           <p
-            className={`text-sm font-medium ${
-              business_status === "OPERATIONAL"
-                ? "text-green-600"
-                : "text-red-600"
-            }`}
+            className={`text-sm font-medium`}
           >
-            {business_status === "OPERATIONAL" ? "Open Now" : "Closed"}
+            {business_status === "OPERATIONAL" ? "Operational" : "Non-Operational"}
           </p>
-          <p>{isOpen ? "OPEN" : "CLOSED"}</p>
+          <p  
+          className={`text-sm font-medium ${
+            isOpen
+              ? "text-green-600"
+              : "text-red-600"
+          }`}
+          >{isOpen ? "OPEN NOW" : "CLOSED"}</p>
         </div>
       </div>
     </Link>

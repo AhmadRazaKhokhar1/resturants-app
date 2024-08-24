@@ -1,3 +1,4 @@
+import Link from "next/link";
 import LogoMain from "./LogoMain";
 
 export default function Navbar() {
@@ -6,9 +7,11 @@ export default function Navbar() {
       <nav>
         <div className="flex gap-2 items-center">
         <LogoMain/>
+        <Link href={'/'}>
         <strong className="text-xl">
           Enatega
         </strong>
+        </Link>
         </div>
       </nav>
     </div>
