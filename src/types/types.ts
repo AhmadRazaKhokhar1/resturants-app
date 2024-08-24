@@ -29,3 +29,8 @@ export type SampleProductType = {
   headline: string;
 };
 
+export type CartContextType = {
+  items:SampleProductType[],
+  addToCart:void,
+  removeFromCart:void
+}
