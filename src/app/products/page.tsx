@@ -26,7 +26,9 @@ export default function Products({
     const randomProducts = [];
     for (let i = 0; i <= randomCount; i++) {
       const newProduct = GenerateSampleProducts();
-      randomProducts.push(newProduct);
+      if(newProduct){
+        randomProducts.push(newProduct);
+      }
     }
     setProducts(randomProducts);
   }, []);

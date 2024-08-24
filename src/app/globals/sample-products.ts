@@ -8,7 +8,7 @@ import {
   generateRandomId,
 } from "./callbacks";
 
-export function GenerateSampleProducts() :SampleProductType{
+export function GenerateSampleProducts() :SampleProductType | undefined{
   try {
     const keyword = generateKeyWord();
     const pricesObj = generatePrices();

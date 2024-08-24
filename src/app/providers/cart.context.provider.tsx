@@ -9,6 +9,8 @@ export default function CartProviderContext({
 }: {
   children: ReactNode;
 }) {
+
+
   const [cart, setCart] = useState<SampleProductType[]>([]);
 
   function addToCart(product: SampleProductType): void {
@@ -23,12 +25,12 @@ export default function CartProviderContext({
   }
 
   const state = {
-    cart,
+    items:cart,
     addToCart,
     removeFromCart,
   };
 
   return (
-    <CartContext.Provider value={{ state }}>{children}</CartContext.Provider>
+    <CartContext.Provider value={ state }>{children}</CartContext.Provider>
   );
 }

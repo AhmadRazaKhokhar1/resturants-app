@@ -23,8 +23,9 @@ export default function ProductCard({
         src={image}
         alt={keyword}
         onError={(e) => {
-          e.target.onerror = null;
-          e.target.src = productPlaceHolder.src;
+          let target = e.target as HTMLImageElement
+          target.onerror = null;
+          target.src = productPlaceHolder.src;
         }}
       />
       <div className="px-6 py-4">

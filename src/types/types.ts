@@ -32,6 +32,6 @@ export type SampleProductType = {
 
 export type CartContextType = {
   items:SampleProductType[],
-  addToCart:void,
-  removeFromCart:void
+  addToCart:(product:SampleProductType)=>void,
+  removeFromCart:(id:string)=>void
 }

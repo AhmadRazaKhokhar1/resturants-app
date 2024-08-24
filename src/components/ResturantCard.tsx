@@ -37,8 +37,9 @@ export default function ResturantCard({
             className="w-full h-full"
             src={photoRefrence}
             onError={(e)=>{
-              e.target.onerror =null;
-              e.target.src = product_placeholder.src;
+              let target = e.target as HTMLImageElement;
+              target.onerror =null;
+              target.src = product_placeholder.src;
             }}
             alt={restaurantName}
           />

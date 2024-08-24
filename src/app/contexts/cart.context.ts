@@ -1,9 +1,10 @@
 "use client"
-import { CartContextType } from "@/types/types";
+import { CartContextType, SampleProductType } from "@/types/types";
 import { createContext, useContext } from "react";
 const cartContextValue = {
   items: [
     {
+      id:"",
       keyword: "",
       pricesObj: {
         regularPrice: 0,
@@ -14,10 +15,14 @@ const cartContextValue = {
       headline: "",
     },
   ],
-  addToCart: void{},
-  removeFromCart: void{},
+  addToCart: (product:SampleProductType)=>void{},
+  removeFromCart: (id:string)=>void{},
 };
 export const CartContext = createContext<CartContextType>(cartContextValue);
 export function useCartContext(){
-  return useContext(CartContext);
+  const state = useContext(CartContext);
+  if(!state){
+    return console.warn(`${state} must be containing cart items`)
+  }
+  return state;
 }
