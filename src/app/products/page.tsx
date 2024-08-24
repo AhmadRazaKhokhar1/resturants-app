@@ -19,7 +19,6 @@ export default function Products({
   };
 }) {
   const [products, setProducts] = useState<SampleProductType[]>([]);
-  console.log({ searchParams });
 
   useEffect(() => {
     let maxProducts = 50;

@@ -5,6 +5,7 @@ import {
   generateKeyWord,
   generatePrices,
   generateProductHealdine,
+  generateRandomId,
 } from "./callbacks";
 
 export function GenerateSampleProducts() :SampleProductType{
@@ -13,8 +14,9 @@ export function GenerateSampleProducts() :SampleProductType{
     const pricesObj = generatePrices();
     const image = generateImages(keyword);
     const headline = generateProductHealdine(keyword);
-
+    const id = generateRandomId();
     const newProduct = {
+      id:id,
       keyword,
       pricesObj,
       image,

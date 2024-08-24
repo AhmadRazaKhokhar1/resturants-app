@@ -1,26 +1,23 @@
+"use client"
 import { CartContextType } from "@/types/types";
-import { createContext } from "react";
-
- // Add To Cart
- function addToCart(): void {}
- // Remove From Cart
- function removeFromCart(): void {}
-
-const defaultCartContext = {
-    items: [
-      {
-        keyword: "",
-        pricesObj: {
-          regularPrice: 0,
-          salePrice: 0,
-          sale: 0,
-        },
-        image: "",
-        headline: "",
+import { createContext, useContext } from "react";
+const cartContextValue = {
+  items: [
+    {
+      keyword: "",
+      pricesObj: {
+        regularPrice: 0,
+        salePrice: 0,
+        sale: 0,
       },
-    ],
-    addToCart: addToCart,
-    removeFromCart: removeFromCart,
-  };
-const CartContext = createContext<CartContextType>(defaultCartContext);
-export default CartContext;
+      image: "",
+      headline: "",
+    },
+  ],
+  addToCart: void{},
+  removeFromCart: void{},
+};
+export const CartContext = createContext<CartContextType>(cartContextValue);
+export function useCartContext(){
+  return useContext(CartContext);
+}

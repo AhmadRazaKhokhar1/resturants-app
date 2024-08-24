@@ -23,6 +23,7 @@ export type Prices = {
 };
 
 export type SampleProductType = {
+  id:string
   keyword: string;
   pricesObj: Prices;
   image: string;

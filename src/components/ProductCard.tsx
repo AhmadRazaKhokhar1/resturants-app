@@ -15,6 +15,7 @@ export default function ProductCard({
   image: string;
   keyword: string;
 }) {
+
   return (
     <div className="max-w-sm rounded overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
       <img

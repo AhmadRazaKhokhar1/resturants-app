@@ -4,6 +4,9 @@ import { FaCartShopping } from "react-icons/fa6";
 import { MdPerson3 } from "react-icons/md";
 
 export default function Navbar() {
+  // const {cartContextValue} = useCartContext()
+  // console.log({cartContextValue})
+
   return (
     <div className="p-0 mb-1 w-full">
       <nav className="flex justify-between px-2 w-full shadow shadow-gray-400 p-3 items-center">
