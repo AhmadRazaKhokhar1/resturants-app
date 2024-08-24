@@ -14,8 +14,12 @@ import AutoCompleteDropDown from "./AutoCompleteDropDown";
 const MapComponent = () => {
   const [defaultMapCenter, setDefaultMapsCenter] =
     useState<GoogleMapTypes.geoLocation>({
-      lat: 35.8799866,
-      lng: 76.5048004,
+      lat: 33.8799866,
+      lng: 71.5048004,
+      alt: null,
+      accuracy: null,
+      heading: null,
+      speed: null,
     });
 
   const [restaurantsMapCenter, setRestaurantsMapCenter] = useState<
@@ -56,9 +60,13 @@ const MapComponent = () => {
           setDefaultMapsCenter({
             lat: position.coords.latitude,
             lng: position.coords.longitude,
+            alt: position.coords.altitude ?? 0,
+            accuracy: position.coords.accuracy,
+            heading: position.coords.heading,
+            speed: position.coords.speed,
           });
           toast.success(
-            `Your location is marked: Latitude ${position.coords.latitude}, Longitude ${position.coords.longitude}`
+            `Your location is marked at Latitude ${position.coords.latitude} and Longitude ${position.coords.longitude}`
           );
         },
         (failed) => {
