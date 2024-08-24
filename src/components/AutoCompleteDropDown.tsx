@@ -14,10 +14,10 @@ export default function AutoCompleteDropDown({
         placeholder="Enter Destination"
         className="p-0 sm:p-2 lg:p-3 xl:p-3 w-52 sm:w-72 lg:w-96 z-10 outline-none overflow-hidden"
       />
-      <button onClick={getCurrentUserLocation} className="p-1 bg-transparent">
+      <button onClick={getCurrentUserLocation} className="p-1 bg-transparent" id="current-location">
         <TbCurrentLocation size={20} color="green" />
       </button>
-      <button className="bg-green-600 p-3" onClick={getRestaurantsList}>
+      <button className="bg-green-600 p-3" onClick={getRestaurantsList} id="get-restaurants">
         Get Restaurants
       </button>
     </div>

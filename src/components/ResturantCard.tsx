@@ -31,6 +31,7 @@ export default function ResturantCard({
       <div
         className="max-w-72 rounded-lg overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1 hover:scale-105"
         key={placeId}
+        id="restaurant-card"
       >
         <div className="w-72 h-72 overflow-hidden justify-center">
           <img
