@@ -19,10 +19,3 @@ const cartContextValue = {
   removeFromCart: (id:string)=>void{},
 };
 export const CartContext = createContext<CartContextType>(cartContextValue);
-export function useCartContext(){
-  const state = useContext(CartContext);
-  if(!state){
-    return console.warn(`${state} must be containing cart items`)
-  }
-  return state;
-}

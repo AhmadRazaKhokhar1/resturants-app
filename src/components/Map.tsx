@@ -1,10 +1,9 @@
 "use client";
-import { TbCurrentLocation } from "react-icons/tb";
 import {
   defaultMapContainerStyle,
   defaultMapOptions,
 } from "@/app/globals/global-vars";
-import * as GoogleMapTypes from "@/types/global-types";
+import * as GoogleMapTypes from "@types/google.maps";
 import { Autocomplete, GoogleMap, Marker } from "@react-google-maps/api";
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
@@ -47,6 +46,7 @@ const MapComponent = () => {
         setDefaultMapsCenter({
           lat: location.lat(),
           lng: location.lng(),
+          alt:location.alt()
         });
       }
     }
@@ -58,15 +58,15 @@ const MapComponent = () => {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           setDefaultMapsCenter({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-            alt: position.coords.altitude ?? 0,
+            lat: position.coords.lat,
+            lng: position.coords.lng,
+            alt: position.coords.alt ?? null,
             accuracy: position.coords.accuracy,
             heading: position.coords.heading,
             speed: position.coords.speed,
           });
           toast.success(
-            `Your location is marked at Latitude ${position.coords.latitude} and Longitude ${position.coords.longitude}`
+            `Your location is marked at Latitude ${position.coords.lat} and Longitude ${position.coords.lng}`
           );
         },
         (failed) => {
