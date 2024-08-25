@@ -6,7 +6,7 @@ export default function AutoCompleteDropDown({
   getRestaurantsList,
 }: RestaurantCardCallBacksType) {
   return (
-    <div className="absolute flex lg:mt-[20%] lg:ml-[40%] md:mt-[40%] md:ml-[20%] sm:mt-[40%] sm:ml-[20%] ml-[8%] mt-[40%] outline outline-green-600 rounded-md shadow-2xl shadow-black items-center bg-white overflow-hidden p-0">
+    <div className="absolute flex lg:mt-[20%] lg:ml-[30%] md:mt-[40%] md:ml-[20%] sm:mt-[40%] sm:ml-[20%] ml-[8%] mt-[40%] outline outline-green-600 rounded-md shadow-2xl shadow-black items-center bg-white overflow-hidden p-0">
       <input
         type="text"
         name="autocomplete"

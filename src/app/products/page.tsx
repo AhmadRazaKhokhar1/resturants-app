@@ -71,6 +71,7 @@ export default function Products({
         return (
           <ProductCard
             key={index}
+            id={product.id}
             headline={product.headline}
             salePrice={product.pricesObj.salePrice}
             regularPrice={product.pricesObj.regularPrice}
