@@ -1,3 +1,4 @@
+import Image from "next/image";
 import productPlaceHolder from "../app/assets/product_placeholder.png";
 
 export default function ProductCard({
@@ -18,7 +19,7 @@ export default function ProductCard({
 
   return (
     <div className="max-w-sm rounded overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-      <img
+      <Image
         className="w-full object-cover h-48"
         src={image}
         alt={keyword}

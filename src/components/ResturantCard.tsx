@@ -3,6 +3,7 @@ import React from "react";
 import { MdStar } from "react-icons/md";
 import product_placeholder from "../app/assets/product_placeholder.png";
 import Link from "next/link";
+import Image from "next/image";
 export default function ResturantCard({
   restaurantName,
   vicinity,
@@ -34,7 +35,7 @@ export default function ResturantCard({
         id="restaurant-card"
       >
         <div className="w-72 h-72 overflow-hidden justify-center">
-          <img
+          <Image
             className="w-full h-full"
             src={photoRefrence}
             onError={(e)=>{
