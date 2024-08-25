@@ -38,6 +38,8 @@ export default function ResturantCard({
           <Image
             className="w-full h-full"
             src={photoRefrence}
+            width={100}
+            height={100}
             onError={(e)=>{
               let target = e.target as HTMLImageElement;
               target.onerror =null;

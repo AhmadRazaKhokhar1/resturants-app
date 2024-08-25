@@ -1,9 +1,10 @@
 "use client";
+import { TbCurrentLocation } from "react-icons/tb";
 import {
   defaultMapContainerStyle,
   defaultMapOptions,
 } from "@/app/globals/global-vars";
-import * as GoogleMapTypes from "@types/google.maps";
+import * as GoogleMapTypes from "@/types/global-types";
 import { Autocomplete, GoogleMap, Marker } from "@react-google-maps/api";
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
@@ -46,7 +47,6 @@ const MapComponent = () => {
         setDefaultMapsCenter({
           lat: location.lat(),
           lng: location.lng(),
-          alt:location.alt()
         });
       }
     }
@@ -58,15 +58,15 @@ const MapComponent = () => {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           setDefaultMapsCenter({
-            lat: position.coords.lat,
-            lng: position.coords.lng,
-            alt: position.coords.alt ?? null,
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+            alt: position.coords.altitude ?? 0,
             accuracy: position.coords.accuracy,
             heading: position.coords.heading,
             speed: position.coords.speed,
           });
           toast.success(
-            `Your location is marked at Latitude ${position.coords.lat} and Longitude ${position.coords.lng}`
+            `Your location is marked at Latitude ${position.coords.latitude} and Longitude ${position.coords.longitude}`
           );
         },
         (failed) => {
@@ -130,7 +130,6 @@ const MapComponent = () => {
       setPlacesService(newPlacesService);
     }
   }, [mapRef.current]);
-
   return (
     <div className="w-full">
       <GoogleMap
@@ -159,20 +158,24 @@ const MapComponent = () => {
         ))}
       </GoogleMap>
       <div className="restaurant-cards flex flex-wrap gap-2 my-2 items-center justify-center">
-        {restaurantsMapCenter.map((restaurant) => {
-          return (
-            <ResturantCard
-              placeId={restaurant.placeId}
-              business_status={restaurant.businessStatus}
-              isOpen={restaurant.isOpen}
-              photoRefrence={restaurant.photos}
-              rating={restaurant.rating}
-              vicinity={restaurant.vicinity}
-              user_ratings_total={restaurant.userRatings}
-              restaurantName={restaurant.name}
-            />
-          );
-        })}
+        {restaurantsMapCenter.length >= 1 ? (
+          restaurantsMapCenter.map((restaurant) => {
+            return (
+              <ResturantCard
+                placeId={restaurant.placeId}
+                business_status={restaurant.businessStatus}
+                isOpen={restaurant.isOpen}
+                photoRefrence={restaurant.photos}
+                rating={restaurant.rating}
+                vicinity={restaurant.vicinity}
+                user_ratings_total={restaurant.userRatings}
+                restaurantName={restaurant.name}
+              />
+            );
+          })
+        ) : (
+          <strong>Enter Location To See Nearby Places!</strong>
+        )}
       </div>
     </div>
   );
