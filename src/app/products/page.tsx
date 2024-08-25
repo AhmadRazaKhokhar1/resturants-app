@@ -1,10 +1,12 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { GenerateSampleProducts } from "../globals/sample-products";
 import { SampleProductType } from "@/types/types";
 import { randomIndexGenerator } from "../globals/callbacks";
 import ProductCard from "@/components/ProductCard";
 import { MdBusiness, MdNearMe, MdPerson, MdStar } from "react-icons/md";
+import AddToCartPopup from "@/components/CartPopup";
+import { CartContext } from "../contexts/cart.context";
 export default function Products({
   searchParams,
 }: {
@@ -32,6 +34,9 @@ export default function Products({
     }
     setProducts(randomProducts);
   }, []);
+
+
+  const {addToCart, cartPopup, isPopupOpen} = useContext(CartContext)
 
   return (
     <div className="self-center flex gap-2 flex-wrap items-center justify-center">
@@ -78,9 +83,19 @@ export default function Products({
             salePercentage={product.pricesObj.sale}
             image={product.image}
             keyword={product.keyword}
+            cartPopup={cartPopup}
           />
         );
       })}
+
+    {/* Popup Component  */}
+    <AddToCartPopup
+        products={products}
+        isVisible={isPopupOpen}
+        cancelAddToCart={cartPopup}
+        addToCart={addToCart}
+      />
+
     </div>
   );
 }

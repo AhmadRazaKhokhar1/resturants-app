@@ -33,5 +33,15 @@ export type SampleProductType = {
 export type CartContextType = {
   items:SampleProductType[],
   addToCart:(product:SampleProductType)=>void,
-  removeFromCart:(id:string)=>void
+  removeFromCart:(id:string)=>void,
+  cartPopup:(state:boolean, id:string)=>void,
+  isPopupOpen:{
+    id:string,
+    state:boolean
+  }
+}
+
+export type isPopupOpen = {
+  id:string,
+  state:boolean
 }

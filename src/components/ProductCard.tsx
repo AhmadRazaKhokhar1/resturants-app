@@ -1,8 +1,5 @@
 import Image from "next/image";
 import productPlaceHolder from "../app/assets/product_placeholder.png";
-import { useContext, useState } from "react";
-import { CartContext } from "@/app/contexts/cart.context";
-import AddToCartPopup from "./CartPopu";
 
 export default function ProductCard({
   headline,
@@ -12,6 +9,7 @@ export default function ProductCard({
   image,
   keyword,
   id,
+  cartPopup,
 }: {
   headline: string;
   regularPrice: number;
@@ -20,6 +18,7 @@ export default function ProductCard({
   image: string;
   keyword: string;
   id: string;
+  cartPopup: (state: boolean, id: string) => void;
 }) {
   const product = {
     id,
@@ -32,24 +31,8 @@ export default function ProductCard({
     image,
     headline,
   };
-  const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
-  const { addToCart } = useContext(CartContext);
-
-  // POPUP ADD TO CART
-  const cartPopup = (state: boolean) => {
-    setIsPopupOpen(state);
-  };
-
   return (
     <div className="max-w-sm bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
-      {/* Popup Component  */}
-      <AddToCartPopup
-        isVisible={isPopupOpen}
-        product={product}
-        cancelAddToCart={cartPopup}
-        addToCart={addToCart}
-      />
-
       <div className="relative">
         <Image
           className="w-full object-cover h-56"
@@ -87,7 +70,7 @@ export default function ProductCard({
           </span>
           <button
             className="bg-green-600 text-white text-sm font-semibold py-2 px-4 rounded hover:bg-blue-600 transition-colors duration-300"
-            onClick={() => cartPopup(true)}
+            onClick={() => cartPopup(true, id)}
           >
             Add to Cart
           </button>
