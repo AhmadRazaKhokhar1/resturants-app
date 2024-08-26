@@ -41,7 +41,7 @@ export default function ResturantCard({
             width={100}
             height={100}
             onError={(e)=>{
-              let target = e.target as HTMLImageElement;
+              let target = e.target as any;
               target.onerror =null;
               target.src = product_placeholder.src;
             }}

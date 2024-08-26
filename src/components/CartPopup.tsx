@@ -32,7 +32,7 @@ export default function AddToCartPopup({
             width={300}
             height={150}
             onError={(e) => {
-              let target = e.target as HTMLImageElement;
+              let target = e.target as any;
               target.onerror = null;
               target.src = productPlaceHolder.src;
             }}
@@ -61,12 +61,14 @@ export default function AddToCartPopup({
           <div className="flex justify-between w-full">
             <button
               className="bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded hover:bg-gray-400 transition-colors duration-300"
+              id="cancel-add-to-cart"
               onClick={() => cancelAddToCart(false, isVisible?.id)}
             >
               Cancel
             </button>
             <button
               className="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition-colors duration-300"
+              id="add-to-cart"
               onClick={() => addToCart(product)}
             >
               Add to Cart
