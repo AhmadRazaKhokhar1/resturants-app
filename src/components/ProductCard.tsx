@@ -32,10 +32,10 @@ export default function ProductCard({
     headline,
   };
   return (
-    <div className="max-w-72 bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
+    <div className="max-w-72 mx-h-72 bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
       <div className="relative">
         <Image
-          className="w-full object-cover h-56"
+          className="max-w-72 object-cover max-h-52"
           src={image}
           alt={keyword}
           width={400}
@@ -69,7 +69,7 @@ export default function ProductCard({
             #{keyword}
           </span>
           <button
-            className="bg-green-600 text-white text-sm font-semibold py-2 px-4 rounded hover:bg-blue-600 transition-colors duration-300"
+            className="bg-green-600 flex flex-nowrap text-nowrap text-white text-sm font-semibold py-2 px-4 rounded hover:bg-blue-600 transition-colors duration-300"
             onClick={() => cartPopup(true, id)}
           >
             Add to Cart

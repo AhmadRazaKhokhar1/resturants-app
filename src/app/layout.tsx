@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
 import CartProviderContext from "./providers/cart.context.provider";
+import Footer from "@/components/Footer";
 
 export var metadata: Metadata = {
   title: "Enatega",
@@ -22,6 +23,7 @@ export default function RootLayout({
           <Navbar />
           <Toaster />
           {children}
+          <Footer/>
         </CartProviderContext>
       </body>
     </html>
