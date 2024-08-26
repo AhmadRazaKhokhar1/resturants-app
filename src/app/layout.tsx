@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head></head>
-      <body>
+      <body className="flex flex-col justify-between h-[100vh] w-full">
         <CartProviderContext>
           <Navbar />
           <Toaster />

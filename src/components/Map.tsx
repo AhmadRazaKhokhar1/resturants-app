@@ -5,15 +5,17 @@ import {
   defaultMapOptions,
 } from "@/app/globals/global-vars";
 import * as GoogleMapTypes from "@/types/global-types";
-import { Autocomplete, GoogleMap, Marker } from "@react-google-maps/api";
+import { Autocomplete, GoogleMap, MapState, Marker } from "@react-google-maps/api";
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import ResturantCard from "./ResturantCard";
 import AutoCompleteDropDown from "./AutoCompleteDropDown";
+import { ImSpinner, ImSpinner10, ImSpinner11, ImSpinner2 } from "react-icons/im";
 
 const MapComponent = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [defaultMapCenter, setDefaultMapsCenter] =
-    useState<GoogleMapTypes.GeoCoordinates>({
+    useState<any>({
       lat: 33.8799866,
       lng: 71.5048004,
       alt: null,
@@ -42,8 +44,9 @@ const MapComponent = () => {
       if (place.geometry) {
         const location = place.geometry.location;
         setDefaultMapsCenter({
-          lat: location.lat(),
-          lng: location.lng(),
+          lat: location?.lat(),
+          lng: location?.lng(),
+          alt:location?.alt()
         });
       }
     }
@@ -53,17 +56,17 @@ const MapComponent = () => {
   const getCurrentUserLocation = () => {
     try {
       navigator.geolocation.getCurrentPosition(
-        (position) => {
+        (position:{coords:{latitude:number,longitude:number,altitude:number|null}}) => {
           setDefaultMapsCenter({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-            alt: position.coords.altitude ?? 0,
+            lat: position.coords?.latitude,
+            lng: position.coords?.longitude,
+            alt: position.coords?.altitude ?? 0,
           });
           toast.success(
             `Your location is marked at Latitude ${position.coords.latitude} and Longitude ${position.coords.longitude}`
           );
         },
-        (failed) => {
+        (failed:any) => {
           console.log(failed);
           toast.error(failed.message);
         }
@@ -129,6 +132,8 @@ const MapComponent = () => {
 
   useEffect(() => {
     let newPlacesService;
+    setIsLoading(true)
+
     if (mapRef.current) {
       newPlacesService = new google.maps.places.PlacesService(mapRef.current);
       setPlacesService(newPlacesService);
@@ -139,12 +144,19 @@ const MapComponent = () => {
     if (placesService) {
       setTimeout(() => {
         getRestaurantsList();
+        setIsLoading(false)
       }, 500);
     }
   }, [placesService]);
   return (
     <div className="w-full">
-      <GoogleMap
+      
+        {isLoading&&<ImSpinner2
+        color="green" 
+        size={50} 
+        className="absolute top-1/2 left-1/2 animate-spin" 
+        />}
+        <GoogleMap
         mapContainerStyle={defaultMapContainerStyle}
         center={defaultMapCenter}
         zoom={defaultMapZoom}

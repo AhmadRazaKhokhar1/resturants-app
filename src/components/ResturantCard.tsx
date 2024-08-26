@@ -30,13 +30,13 @@ export default function ResturantCard({
       }}
     >
       <div
-        className="max-w-72 rounded-lg overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1 hover:scale-105"
+        className="min-w-72 max-w-96 min-h-96 max-h-auto bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1"
         key={placeId}
         id="restaurant-card"
       >
-        <div className="w-72 h-72 overflow-hidden justify-center">
+        <div className="w-96 h-72 overflow-hidden justify-start items-center">
           <Image
-            className="w-full h-full"
+            className="w-full h-full  object-cover"
             src={photoRefrence}
             width={100}
             height={100}
@@ -50,7 +50,7 @@ export default function ResturantCard({
         </div>
         <div className="p-5">
           <h3 className="text-xl font-semibold mb-2 text-gray-800">
-            {restaurantName}
+            {restaurantName.length>30?restaurantName.slice(0, 30)+"...":restaurantName}
           </h3>
           <div className="flex items-center gap-1 mb-3">
             <MdStar className="text-yellow-400" />
