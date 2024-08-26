@@ -16,7 +16,6 @@ export default function AddToCartPopup({
   addToCart,
 }: AddToCartInterface) {
   const [product] = products.filter((product) => product?.id === isVisible?.id);
-  console.log({product})
   return (
     <div
       className={`fixed inset-0 flex items-center justify-center z-50 transition-opacity duration-300 ${
@@ -62,7 +61,7 @@ export default function AddToCartPopup({
           <div className="flex justify-between w-full">
             <button
               className="bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded hover:bg-gray-400 transition-colors duration-300"
-              onClick={() => cancelAddToCart(false, isVisible.id)}
+              onClick={() => cancelAddToCart(false, isVisible?.id)}
             >
               Cancel
             </button>
