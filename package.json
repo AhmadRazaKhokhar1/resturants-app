@@ -12,6 +12,7 @@
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.16.8",
     "@react-google-maps/api": "^2.19.3",
+    "framer-motion": "^11.3.30",
     "google-map-react": "^2.2.1",
     "next": "14.2.5",
     "react": "^18",
