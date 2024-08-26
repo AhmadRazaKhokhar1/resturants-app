@@ -6,27 +6,17 @@ export default function InitiateCheckout({
   products,
   removeFromCart,
   setIsPopupOpen,
+  setIsPaymentPopupOpen,
+  totalPrice,
+  clearCart,
 }: {
   products: SampleProductType[];
   removeFromCart: (id: string) => void;
   setIsPopupOpen: Dispatch<SetStateAction<boolean>>;
+  setIsPaymentPopupOpen: Dispatch<SetStateAction<boolean>>;
+  totalPrice: number;
+  clearCart: () => void;
 }) {
-  const [totalPrice, setTotalPrice] = useState<number>(0);
-  const [isPaymentPopupOpen, setIsPaymentPopupOpen] = useState<boolean>(false);
-  const calculateTotalPrice = () => {
-    let total = 0;
-    products?.forEach((product: SampleProductType) => {
-      let price =
-        product?.pricesObj?.salePrice ?? product?.pricesObj?.regularPrice;
-      total += price;
-    });
-    setTotalPrice(total);
-  };
-
-  useEffect(() => {
-    calculateTotalPrice();
-  }, [products]);
-
   function handlePayments(): void {
     setIsPopupOpen((prev) => !prev);
     setIsPaymentPopupOpen(true);
@@ -69,13 +59,20 @@ export default function InitiateCheckout({
               $ {totalPrice && Math.round(totalPrice + 15)}
             </span>
           </div>
-
-          <button
-            className="w-full mt-6 bg-green-600 text-white font-semibold py-3 rounded-lg hover:bg-green-700 transition-colors duration-300"
-            onClick={handlePayments}
-          >
-            Checkout
-          </button>
+          <div className="flex justify-between items-center w-full gap-2">
+            <button
+              className="w-full mt-6 bg-red-600 text-white font-semibold py-3 rounded-lg hover:bg-green-700 transition-colors duration-300"
+              onClick={clearCart}
+            >
+              Clear Cart
+            </button>
+            <button
+              className="w-full mt-6 bg-green-600 text-white font-semibold py-3 rounded-lg hover:bg-green-700 transition-colors duration-300"
+              onClick={handlePayments}
+            >
+              Checkout
+            </button>
+          </div>
         </div>
       )}
     </motion.div>

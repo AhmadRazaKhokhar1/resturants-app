@@ -2,7 +2,7 @@ import { CartContext } from "@/app/contexts/cart.context";
 import { isPopupOpen, SampleProductType } from "@/types/types";
 import { ReactNode, useState } from "react";
 
-export default function CarProvidor({ children }: { children: ReactNode }) {
+export default function CartProvidor({ children }: { children: ReactNode }) {
   const [products, setProducts] = useState<SampleProductType[]>([]);
   const [isPopupOpen, setIsPopupOpen] = useState<isPopupOpen>({
     id: "",
@@ -24,8 +24,11 @@ export default function CarProvidor({ children }: { children: ReactNode }) {
   function cartPopup(state: boolean, id: string) {
     setIsPopupOpen({
       id: id,
-      state:state,
+      state: state,
     });
+  }
+  function clearCart():void {
+    setProducts([]);
   }
   return (
     <CartContext.Provider
@@ -34,6 +37,7 @@ export default function CarProvidor({ children }: { children: ReactNode }) {
         addToCart,
         removeFromCart,
         cartPopup,
+        clearCart,
         isPopupOpen,
       }}
     >
