@@ -8,5 +8,6 @@ export const CartContext = createContext<CartContextType>({
   addToCart:(product:SampleProductType)=>void{},
   removeFromCart:(id:string)=>void{},
   cartPopup:(state:boolean, id:string)=>void{},
-  isPopupOpen:{id:"", state:false}
+  isPopupOpen:{id:"", state:false},
+  clearCart:()=>void{}
 });
