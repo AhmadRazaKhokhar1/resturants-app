@@ -2,17 +2,22 @@ import { SampleProductType } from "@/types/types";
 import CartProduct from "./CartProduct";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import FinalCheckout from "./FinalCheckout";
 export default function InitiateCheckout({
   products,
   removeFromCart,
   setIsPopupOpen,
+  setIsPaymentPopupOpen,
+  totalPrice,
+  setTotalPrice,
 }: {
   products: SampleProductType[];
   removeFromCart: (id: string) => void;
   setIsPopupOpen: Dispatch<SetStateAction<boolean>>;
+  setIsPaymentPopupOpen: Dispatch<SetStateAction<boolean>>;
+  totalPrice: number;
+  setTotalPrice: Dispatch<SetStateAction<number>>;
 }) {
-  const [totalPrice, setTotalPrice] = useState<number>(0);
-  const [isPaymentPopupOpen, setIsPaymentPopupOpen] = useState<boolean>(false);
   const calculateTotalPrice = () => {
     let total = 0;
     products?.forEach((product: SampleProductType) => {

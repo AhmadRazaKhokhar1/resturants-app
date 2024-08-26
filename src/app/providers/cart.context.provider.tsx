@@ -40,13 +40,18 @@ export default function CartProviderContext({
       id
     })
   }
+ 
+  function clearCart ():void{
+    setCart([]);
+  }
 
   const state = {
     items:cart,
     addToCart,
     removeFromCart,
     isPopupOpen,
-    cartPopup
+    cartPopup,
+    clearCart
   };
 
   return (

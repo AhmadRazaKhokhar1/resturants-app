@@ -6,11 +6,14 @@ import { MdPerson3 } from "react-icons/md";
 import { CartContext } from "@/app/contexts/cart.context";
 import { useContext, useState } from "react";
 import InitiateCheckout from "./InitiateCheckout";
+import FinalCheckout from "./FinalCheckout";
 
 export default function Navbar() {
   const { items, removeFromCart } = useContext(CartContext);
-
+  const [isPaymentPopupOpen, setIsPaymentPopupOpen] = useState<boolean>(false);
   const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
+  const [totalPrice, setTotalPrice] = useState<number>(0);
+
   return (
     <div className="p-0 mb-1 w-full caret-transparent">
       <nav className="flex justify-between px-2 w-full shadow shadow-gray-400 p-3 items-center">
@@ -42,8 +45,12 @@ export default function Navbar() {
                 products={items}
                 removeFromCart={removeFromCart}
                 setIsPopupOpen={setIsPopupOpen}
+                setIsPaymentPopupOpen={setIsPaymentPopupOpen}
+                totalPrice={totalPrice}
+                setTotalPrice={setTotalPrice}
               />
             )}
+            {isPaymentPopupOpen&&<FinalCheckout totalPrice={totalPrice} setIsPaymentPopupOpen={setIsPaymentPopupOpen} />}
           </button>
         </div>
       </nav>

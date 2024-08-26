@@ -38,7 +38,8 @@ export type CartContextType = {
   isPopupOpen:{
     id:string,
     state:boolean
-  }
+  },
+  clearCart:()=>void
 }
 
 export type isPopupOpen = {
