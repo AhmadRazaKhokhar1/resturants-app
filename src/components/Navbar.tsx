@@ -37,7 +37,6 @@ export default function Navbar() {
             <strong className="text-xl">Enatega</strong>
           </Link>
         </div>
-
         <div className="flex gap-5 mx-3 ">
           <div className="flex items-center justify-start">
             <button

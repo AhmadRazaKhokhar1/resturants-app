@@ -27,9 +27,10 @@ export default function CartProvidor({ children }: { children: ReactNode }) {
       state: state,
     });
   }
-  function clearCart():void {
+  const clearCart = () => {
     setProducts([]);
-  }
+  };
+  console.log(products);
   return (
     <CartContext.Provider
       value={{
@@ -38,6 +39,7 @@ export default function CartProvidor({ children }: { children: ReactNode }) {
         removeFromCart,
         cartPopup,
         clearCart,
+        setProducts,
         isPopupOpen,
       }}
     >

@@ -131,9 +131,8 @@ const MapComponent = () => {
   };
 
   useEffect(() => {
-    let newPlacesService;
     setIsLoading(true)
-
+    let newPlacesService;
     if (mapRef.current) {
       newPlacesService = new google.maps.places.PlacesService(mapRef.current);
       setPlacesService(newPlacesService);
@@ -144,9 +143,9 @@ const MapComponent = () => {
     if (placesService) {
       setTimeout(() => {
         getRestaurantsList();
-        setIsLoading(false)
       }, 500);
     }
+    setIsLoading(false)
   }, [placesService]);
   return (
     <div className="w-full">

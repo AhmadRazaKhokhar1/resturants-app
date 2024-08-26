@@ -20,19 +20,9 @@ export default function ProductCard({
   id: string;
   cartPopup: (state: boolean, id: string) => void;
 }) {
-  const product = {
-    id,
-    keyword,
-    pricesObj: {
-      regularPrice,
-      salePrice,
-      sale: salePercentage,
-    },
-    image,
-    headline,
-  };
+
   return (
-    <div className="max-w-72 mx-h-72 bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
+    <div className="max-w-72 mx-h-72 bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1" key={id + Math.random()*1000000}>
       <div className="relative">
         <Image
           className="max-w-72 object-cover max-h-52"

@@ -18,9 +18,8 @@ export default function FinalCheckout({totalPrice, clearCart}:{totalPrice:number
         [name]:value
      }))
     }
-    function handleSubmit(e:FormEvent){
-        e.preventDefault()
-        clearCart();
+    function handleSubmit(){
+        clearCart()
         toast.success("Successfully placed the order!")
     }
   return (
@@ -31,7 +30,7 @@ export default function FinalCheckout({totalPrice, clearCart}:{totalPrice:number
     >
       <h2 className="text-2xl font-semibold text-gray-800 mb-4">Payment Details</h2>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form className="space-y-4">
         <div>
           <label htmlFor="cardNumber" className="block text-gray-700 font-medium mb-1">
             Card Number
@@ -102,12 +101,13 @@ export default function FinalCheckout({totalPrice, clearCart}:{totalPrice:number
         <div className="mt-4 border-t pt-4">
           <div className="flex justify-between items-center">
             <span className="text-lg font-medium text-gray-700">Total:</span>
-            <span className="text-lg font-semibold text-gray-900">${totalPrice}</span>
+            <span className="text-lg font-semibold text-gray-900">${Math.round(totalPrice)}</span>
           </div>
 
           <button
-            type="submit"
+            type="button"
             className="w-full mt-6 bg-green-600 text-white font-semibold py-3 rounded-lg hover:bg-green-700 transition-colors duration-300"
+            onClick={handleSubmit}
           >
             Pay Now
           </button>

@@ -1,4 +1,4 @@
-import { MouseEventHandler } from "react";
+import { Dispatch, MouseEventHandler, SetStateAction } from "react";
 
 export type RestaurantCardType = {
   restaurantName: string;
@@ -39,7 +39,8 @@ export type CartContextType = {
     id: string;
     state: boolean;
   };
-  clearCart:()=>void
+  clearCart:()=>void,
+  setProducts:Dispatch<SetStateAction<SampleProductType[]>>
 };
 
 export type isPopupOpen = {
