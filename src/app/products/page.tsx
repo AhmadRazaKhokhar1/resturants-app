@@ -39,7 +39,7 @@ export default function Products({
   const {addToCart, cartPopup, isPopupOpen} = useContext(CartContext)
 
   return (
-    <div className="self-center flex gap-2 flex-wrap items-center justify-center">
+    <div className="self-center flex gap-4 flex-wrap items-center justify-center">
       {/* SHOP BANNER  */}
       <div className="banner w-full h-auto p-0 m-0 bg-white shadow-md rounded-lg overflow-hidden mb-20">
   <div className="img-container w-full h-60 md:h-80 overflow-hidden">

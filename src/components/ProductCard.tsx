@@ -32,7 +32,7 @@ export default function ProductCard({
     headline,
   };
   return (
-    <div className="max-w-sm bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
+    <div className="max-w-72 bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
       <div className="relative">
         <Image
           className="w-full object-cover h-56"
