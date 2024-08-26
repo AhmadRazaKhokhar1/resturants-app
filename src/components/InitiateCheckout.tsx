@@ -1,26 +1,27 @@
 import { SampleProductType } from "@/types/types";
 import CartProduct from "./CartProduct";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { CartContext } from "@/app/contexts/cart.context";
 export default function InitiateCheckout({
   products,
   removeFromCart,
   setIsPopupOpen,
   setIsPaymentPopupOpen,
   totalPrice,
-  clearCart,
 }: {
   products: SampleProductType[];
   removeFromCart: (id: string) => void;
   setIsPopupOpen: Dispatch<SetStateAction<boolean>>;
   setIsPaymentPopupOpen: Dispatch<SetStateAction<boolean>>;
   totalPrice: number;
-  clearCart: () => void;
 }) {
   function handlePayments(): void {
     setIsPopupOpen((prev) => !prev);
     setIsPaymentPopupOpen(true);
   }
+  const {clearCart} = useContext(CartContext);
+  console.log({clearCart})
   return (
     <motion.div
       className="absolute max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg shadow-black selection:bg-none z-10 w-96"

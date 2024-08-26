@@ -1,9 +1,11 @@
+import { CartContext } from "@/app/contexts/cart.context";
 import { PaymentForm } from "@/types/types";
 import {motion} from "framer-motion";
-import { FormEvent, FormEventHandler, useState } from "react";
+import { FormEvent, FormEventHandler, useContext, useState } from "react";
 import toast from "react-hot-toast";
 
-export default function FinalCheckout({totalPrice, clearCart}:{totalPrice:number, clearCart:()=>void}) {
+export default function FinalCheckout({totalPrice}:{totalPrice:number}) {
+  const {clearCart} = useContext(CartContext)
     const [paymentForm, setPaymentForm] = useState<PaymentForm>({
         name:"",
         cvv:0,

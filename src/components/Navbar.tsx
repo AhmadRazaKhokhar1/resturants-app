@@ -10,7 +10,7 @@ import FinalCheckout from "./FinalCheckout";
 import { SampleProductType } from "@/types/types";
 
 export default function Navbar() {
-  const { items, removeFromCart, clearCart } = useContext(CartContext);
+  const { items, removeFromCart } = useContext(CartContext);
   const [isPaymentPopupOpen, setIsPaymentPopupOpen] = useState<boolean>(false)
   const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
   const [totalPrice, setTotalPrice] = useState<number>(0);
@@ -60,12 +60,11 @@ export default function Navbar() {
                 setIsPopupOpen={setIsPopupOpen}
                 setIsPaymentPopupOpen={setIsPaymentPopupOpen}
                 totalPrice={totalPrice}
-                clearCart={clearCart}
               />
             )}
           </div>
           {
-            isPaymentPopupOpen&&<FinalCheckout totalPrice={totalPrice} clearCart={clearCart}/>
+            isPaymentPopupOpen&&<FinalCheckout totalPrice={totalPrice}/>
           }
         </div>
       </nav>

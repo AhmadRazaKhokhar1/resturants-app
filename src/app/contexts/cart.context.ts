@@ -1,7 +1,7 @@
 "use client";
 
 import { CartContextType, SampleProductType } from "@/types/types";
-import { createContext, ReactNode, useContext } from "react";
+import { createContext} from "react";
 
 export const CartContext = createContext<CartContextType>({
   items:[],
@@ -10,5 +10,4 @@ export const CartContext = createContext<CartContextType>({
   cartPopup:(state:boolean, id:string)=>void{},
   isPopupOpen:{id:"", state:false},
   clearCart:()=>{},
-  setProducts:()=>{}
 });

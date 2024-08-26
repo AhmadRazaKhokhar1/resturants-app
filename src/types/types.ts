@@ -40,7 +40,6 @@ export type CartContextType = {
     state: boolean;
   };
   clearCart:()=>void,
-  setProducts:Dispatch<SetStateAction<SampleProductType[]>>
 };
 
 export type isPopupOpen = {
