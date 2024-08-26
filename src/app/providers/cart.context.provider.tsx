@@ -12,6 +12,10 @@ export default function CartProviderContext({
 
 
   const [cart, setCart] = useState<SampleProductType[]>([]);
+  const [isPopupOpen, setIsPopupOpen] = useState<{state:boolean, id:string}>({
+    state:false,
+    id:""
+  })
 
   function addToCart(product: SampleProductType): void {
     setCart((prev) => ([...prev, product]));
@@ -24,10 +28,19 @@ export default function CartProviderContext({
     setCart(updatedCart);
   }
 
+  function cartPopup( state:boolean, id:string):void{
+    setIsPopupOpen({
+      state,
+      id
+    })
+  }
+
   const state = {
     items:cart,
     addToCart,
     removeFromCart,
+    isPopupOpen,
+    cartPopup
   };
 
   return (

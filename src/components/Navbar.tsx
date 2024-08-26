@@ -25,7 +25,7 @@ export default function Navbar() {
         <div className="flex gap-5 mx-3">
           <div className="cart">
             <FaCartShopping color="black" size={30} />
-            {items?.length-1 ===0?"":items?.length}
+            {items?.length ===0?"":items?.length}
           </div>
           <div className="account">
             <MdPerson3 color="black" size={30} />
