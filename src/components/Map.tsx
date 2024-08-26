@@ -13,13 +13,10 @@ import AutoCompleteDropDown from "./AutoCompleteDropDown";
 
 const MapComponent = () => {
   const [defaultMapCenter, setDefaultMapsCenter] =
-    useState<GoogleMapTypes.geoLocation>({
+    useState<GoogleMapTypes.GeoCoordinates>({
       lat: 33.8799866,
       lng: 71.5048004,
       alt: null,
-      accuracy: null,
-      heading: null,
-      speed: null,
     });
 
   const [restaurantsMapCenter, setRestaurantsMapCenter] = useState<
@@ -61,9 +58,6 @@ const MapComponent = () => {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
             alt: position.coords.altitude ?? 0,
-            accuracy: position.coords.accuracy,
-            heading: position.coords.heading,
-            speed: position.coords.speed,
           });
           toast.success(
             `Your location is marked at Latitude ${position.coords.latitude} and Longitude ${position.coords.longitude}`
@@ -82,11 +76,20 @@ const MapComponent = () => {
 
   // Get list of nearby restaurants
   const getRestaurantsList = () => {
-    if (!placesService) {
-      toast.error("PlacesService is not initialized.");
+    if (!mapRef.current || !placesService) {
+      toast.error("Map not loaded yet.");
       return;
     }
-
+    toast.loading("loading nearby restaurants", {
+      className: "loading-toast",
+      duration: 30,
+      ariaProps: { "aria-live": "polite", role: "alert" },
+      style: {
+        accentColor: "green",
+        animation: "ease-in-out",
+        color: "green",
+      },
+    });
     const query = {
       location: new google.maps.LatLng(
         defaultMapCenter.lat,
@@ -95,8 +98,7 @@ const MapComponent = () => {
       radius: 5500,
       type: "restaurant",
     };
-
-    placesService.nearbySearch(query, (results, status) => {
+    placesService?.nearbySearch(query, (results, status) => {
       if (status === google.maps.places.PlacesServiceStatus.OK && results) {
         const restaurantsData = results.map((result) => ({
           lat: result.geometry?.location?.lat() ?? 0,
@@ -113,23 +115,33 @@ const MapComponent = () => {
           reviews: result.reviews,
           businessStatus: result.business_status ?? "N/A",
         }));
+        if (results.length === 0) {
+          return toast.error("No restaurants found nearby!");
+        }
         setRestaurantsMapCenter(restaurantsData);
         toast.success("Restaurants have been marked successfully.");
       } else {
-        toast.error("No Resturants Found Nearby");
+        toast.error("No resturants found nearby");
         console.log("PlacesService status:", status);
       }
     });
   };
 
   useEffect(() => {
+    let newPlacesService;
     if (mapRef.current) {
-      const newPlacesService = new google.maps.places.PlacesService(
-        mapRef.current
-      );
+      newPlacesService = new google.maps.places.PlacesService(mapRef.current);
       setPlacesService(newPlacesService);
     }
   }, [mapRef.current]);
+
+  useEffect(() => {
+    if (placesService) {
+      setTimeout(() => {
+        getRestaurantsList();
+      }, 500);
+    }
+  }, [placesService]);
   return (
     <div className="w-full">
       <GoogleMap
