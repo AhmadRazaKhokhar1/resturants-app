@@ -3,6 +3,7 @@
 import { ReactNode, useState } from "react";
 import { CartContext } from "../contexts/cart.context";
 import { SampleProductType } from "@/types/types";
+import toast from "react-hot-toast";
 
 export default function CartProviderContext({
   children,
@@ -19,6 +20,11 @@ export default function CartProviderContext({
 
   function addToCart(product: SampleProductType): void {
     setCart((prev) => ([...prev, product]));
+    setIsPopupOpen({
+      state:false,
+      id:""
+    });
+    toast.success(`Added "${product.headline}" to the Cart`)
   }
 
   function removeFromCart(id: string): void {
