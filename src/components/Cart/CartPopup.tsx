@@ -1,7 +1,7 @@
 import { isPopupOpen, SampleProductType } from "@/types/types";
 import Image from "next/image";
 import productPlaceHolder from "../../app/assets/product_placeholder.png";
-
+import { motion } from "framer-motion";
 interface AddToCartInterface {
   products: SampleProductType[];
   isVisible: isPopupOpen;
@@ -18,12 +18,15 @@ export default function AddToCartPopup({
   const [product] = products.filter((product) => product?.id === isVisible?.id);
   return (
     <div
-      className={`fixed inset-0 flex items-center justify-center z-50 transition-opacity duration-300 ${
+      
+      className={`fixed inset-0 flex items-center justify-center z-50 transition-opacity duration-300  ${
         isVisible?.state ? "opacity-100" : "opacity-0 pointer-events-none"
       }`}
       style={{ visibility: isVisible?.state ? "visible" : "hidden" }}
     >
-      <div className="bg-white rounded-lg shadow-lg p-6 max-w-md w-full">
+      <motion.div 
+      className="bg-white rounded-lg shadow-2xl shadow-black p-6 max-w-md w-full"
+      >
         <div className="flex flex-col items-center">
           <Image
             className="w-full object-cover h-48 rounded"
@@ -75,7 +78,7 @@ export default function AddToCartPopup({
             </button>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }
