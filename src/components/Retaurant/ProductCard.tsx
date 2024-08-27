@@ -22,7 +22,11 @@ export default function ProductCard({
 }) {
 
   return (
-    <div className="max-w-72 mx-h-72 bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1" key={id}>
+    <div 
+    className="max-w-72 mx-h-72 bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1" 
+    key={id}
+    id="product-card"
+    >
       <div className="relative">
         <Image
           className="max-w-72 object-cover max-h-52"
@@ -60,6 +64,7 @@ export default function ProductCard({
           </span>
           <button
             className="bg-green-600 flex flex-nowrap text-nowrap text-white text-sm font-semibold py-2 px-4 rounded hover:bg-blue-600 transition-colors duration-300"
+            id="initiate-add-to-cart"
             onClick={() => cartPopup(true, id)}
           >
             Add to Cart

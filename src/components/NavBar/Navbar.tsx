@@ -44,6 +44,7 @@ export default function Navbar() {
           <div className="flex items-center justify-start">
             <button
               className="cart"
+              id="cart"
               onClick={() => setIsPopupOpen((prev) => !prev)}
             >
               <FaCartShopping color="black" size={30} />

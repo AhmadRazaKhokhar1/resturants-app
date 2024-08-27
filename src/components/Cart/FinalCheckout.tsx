@@ -38,6 +38,7 @@ export default function FinalCheckout({
       className="absolute max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg shadow-gray-500 z-10 w-full md:w-96"
       animate={{ y: 50, x: -280 }}
       transition={{ duration: 0.3 }}
+      id="payment-details"
     >
       <h2 className="text-2xl font-semibold text-gray-800 mb-4">
         Payment Details
@@ -114,6 +115,7 @@ export default function FinalCheckout({
 
           <button
             type="button"
+            id="pay-now"
             className="w-full mt-6 bg-green-600 text-white font-semibold py-3 rounded-lg hover:bg-green-700 transition-colors duration-300"
             onClick={handleSubmit}
           >

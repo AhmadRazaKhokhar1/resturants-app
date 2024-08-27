@@ -69,6 +69,7 @@ export default function InitiateCheckout({
             <button
               className="w-full mt-6 bg-green-600 text-white font-semibold py-3 rounded-lg hover:bg-green-700 transition-colors duration-300"
               onClick={handlePayments}
+              id="go-to-user-details"
             >
               Checkout
             </button>
