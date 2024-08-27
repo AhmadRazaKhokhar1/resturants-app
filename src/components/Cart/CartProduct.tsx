@@ -11,7 +11,7 @@ export default function CartProduct({
   removeFromCart: (id: string) => void;
 }) {
   return (
-    <motion.div animate={{ x: -10 }}>
+    <motion.div animate={{ x: -10 }} key={product.id}>
       <div className="flex justify-between items-center" id="cart-product">
         <span className="w-12 h-12 rounded-full overflow-hidden">
           <Image
