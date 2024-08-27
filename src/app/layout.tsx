@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
-import CartProviderContext from "./providers/cart.context.provider";
 import Footer from "@/components/Footer";
+import CartProviderContext from "@/providers/cart.context.provider";
 
 export var metadata: Metadata = {
   title: "Enatega",
@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head></head>
-      <body>
+      <body className="flex flex-col justify-between h-[100vh] w-full">
         <CartProviderContext>
           <Navbar />
           <Toaster />

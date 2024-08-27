@@ -4,16 +4,30 @@ import LogoMain from "./LogoMain";
 import { FaCartShopping } from "react-icons/fa6";
 import { MdPerson3 } from "react-icons/md";
 import { CartContext } from "@/app/contexts/cart.context";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import InitiateCheckout from "./InitiateCheckout";
 import FinalCheckout from "./FinalCheckout";
+import { SampleProductType } from "@/types/types";
 
 export default function Navbar() {
   const { items, removeFromCart } = useContext(CartContext);
-  const [isPaymentPopupOpen, setIsPaymentPopupOpen] = useState<boolean>(false);
+  const [isPaymentPopupOpen, setIsPaymentPopupOpen] = useState<boolean>(false)
   const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
   const [totalPrice, setTotalPrice] = useState<number>(0);
 
+  const calculateTotalPrice = () => {
+    let total = 0;
+    items?.forEach((product: SampleProductType) => {
+      let price =
+        product?.pricesObj?.salePrice ?? product?.pricesObj?.regularPrice;
+      total += price;
+    });
+    setTotalPrice(total);
+  };
+
+  useEffect(() => {
+    calculateTotalPrice();
+  }, [items]);
   return (
     <div className="p-0 mb-1 w-full caret-transparent">
       <nav className="flex justify-between px-2 w-full shadow shadow-gray-400 p-3 items-center">
@@ -23,7 +37,6 @@ export default function Navbar() {
             <strong className="text-xl">Enatega</strong>
           </Link>
         </div>
-
         <div className="flex gap-5 mx-3 ">
           <div className="flex items-center justify-start">
             <button
@@ -39,7 +52,7 @@ export default function Navbar() {
           <div className="account">
             <MdPerson3 color="black" size={30} />
           </div>
-          <button onBlur={() => setIsPopupOpen(false)}>
+          <div onBlur={() => setIsPopupOpen(false)}>
             {isPopupOpen && (
               <InitiateCheckout
                 products={items}
@@ -47,11 +60,12 @@ export default function Navbar() {
                 setIsPopupOpen={setIsPopupOpen}
                 setIsPaymentPopupOpen={setIsPaymentPopupOpen}
                 totalPrice={totalPrice}
-                setTotalPrice={setTotalPrice}
               />
             )}
-            {isPaymentPopupOpen&&<FinalCheckout totalPrice={totalPrice} setIsPaymentPopupOpen={setIsPaymentPopupOpen} />}
-          </button>
+          </div>
+          {
+            isPaymentPopupOpen&&<FinalCheckout totalPrice={totalPrice}/>
+          }
         </div>
       </nav>
     </div>

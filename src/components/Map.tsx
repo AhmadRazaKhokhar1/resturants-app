@@ -5,21 +5,20 @@ import {
   defaultMapOptions,
 } from "@/app/globals/global-vars";
 import * as GoogleMapTypes from "@/types/global-types";
-import { Autocomplete, GoogleMap, Marker } from "@react-google-maps/api";
+import { Autocomplete, GoogleMap, MapState, Marker } from "@react-google-maps/api";
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import ResturantCard from "./ResturantCard";
 import AutoCompleteDropDown from "./AutoCompleteDropDown";
+import { ImSpinner, ImSpinner10, ImSpinner11, ImSpinner2 } from "react-icons/im";
 
 const MapComponent = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [defaultMapCenter, setDefaultMapsCenter] =
-    useState<GoogleMapTypes.geoLocation>({
+    useState<any>({
       lat: 33.8799866,
       lng: 71.5048004,
       alt: null,
-      accuracy: null,
-      heading: null,
-      speed: null,
     });
 
   const [restaurantsMapCenter, setRestaurantsMapCenter] = useState<
@@ -45,8 +44,9 @@ const MapComponent = () => {
       if (place.geometry) {
         const location = place.geometry.location;
         setDefaultMapsCenter({
-          lat: location.lat(),
-          lng: location.lng(),
+          lat: location?.lat(),
+          lng: location?.lng(),
+          alt:location?.alt()
         });
       }
     }
@@ -56,20 +56,17 @@ const MapComponent = () => {
   const getCurrentUserLocation = () => {
     try {
       navigator.geolocation.getCurrentPosition(
-        (position) => {
+        (position:{coords:{latitude:number,longitude:number,altitude:number|null}}) => {
           setDefaultMapsCenter({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-            alt: position.coords.altitude ?? 0,
-            accuracy: position.coords.accuracy,
-            heading: position.coords.heading,
-            speed: position.coords.speed,
+            lat: position.coords?.latitude,
+            lng: position.coords?.longitude,
+            alt: position.coords?.altitude ?? 0,
           });
           toast.success(
             `Your location is marked at Latitude ${position.coords.latitude} and Longitude ${position.coords.longitude}`
           );
         },
-        (failed) => {
+        (failed:any) => {
           console.log(failed);
           toast.error(failed.message);
         }
@@ -82,11 +79,20 @@ const MapComponent = () => {
 
   // Get list of nearby restaurants
   const getRestaurantsList = () => {
-    if (!placesService) {
-      toast.error("PlacesService is not initialized.");
+    if (!mapRef.current || !placesService) {
+      toast.error("Map not loaded yet.");
       return;
     }
-
+    toast.loading("loading nearby restaurants", {
+      className: "loading-toast",
+      duration: 30,
+      ariaProps: { "aria-live": "polite", role: "alert" },
+      style: {
+        accentColor: "green",
+        animation: "ease-in-out",
+        color: "green",
+      },
+    });
     const query = {
       location: new google.maps.LatLng(
         defaultMapCenter.lat,
@@ -95,8 +101,7 @@ const MapComponent = () => {
       radius: 5500,
       type: "restaurant",
     };
-
-    placesService.nearbySearch(query, (results, status) => {
+    placesService?.nearbySearch(query, (results, status) => {
       if (status === google.maps.places.PlacesServiceStatus.OK && results) {
         const restaurantsData = results.map((result) => ({
           lat: result.geometry?.location?.lat() ?? 0,
@@ -113,26 +118,44 @@ const MapComponent = () => {
           reviews: result.reviews,
           businessStatus: result.business_status ?? "N/A",
         }));
+        if (results.length === 0) {
+          return toast.error("No restaurants found nearby!");
+        }
         setRestaurantsMapCenter(restaurantsData);
         toast.success("Restaurants have been marked successfully.");
       } else {
-        toast.error("No Resturants Found Nearby");
+        toast.error("No resturants found nearby");
         console.log("PlacesService status:", status);
       }
     });
   };
 
   useEffect(() => {
+    setIsLoading(true)
+    let newPlacesService;
     if (mapRef.current) {
-      const newPlacesService = new google.maps.places.PlacesService(
-        mapRef.current
-      );
+      newPlacesService = new google.maps.places.PlacesService(mapRef.current);
       setPlacesService(newPlacesService);
     }
   }, [mapRef.current]);
+
+  useEffect(() => {
+    if (placesService) {
+      setTimeout(() => {
+        getRestaurantsList();
+      }, 500);
+    }
+    setIsLoading(false)
+  }, [placesService]);
   return (
     <div className="w-full">
-      <GoogleMap
+      
+        {isLoading&&<ImSpinner2
+        color="green" 
+        size={50} 
+        className="absolute top-1/2 left-1/2 animate-spin" 
+        />}
+        <GoogleMap
         mapContainerStyle={defaultMapContainerStyle}
         center={defaultMapCenter}
         zoom={defaultMapZoom}

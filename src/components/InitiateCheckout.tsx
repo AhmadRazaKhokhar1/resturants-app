@@ -1,41 +1,26 @@
 import { SampleProductType } from "@/types/types";
 import CartProduct from "./CartProduct";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import FinalCheckout from "./FinalCheckout";
+import { CartContext } from "@/app/contexts/cart.context";
 export default function InitiateCheckout({
   products,
   removeFromCart,
   setIsPopupOpen,
   setIsPaymentPopupOpen,
   totalPrice,
-  setTotalPrice,
 }: {
   products: SampleProductType[];
   removeFromCart: (id: string) => void;
   setIsPopupOpen: Dispatch<SetStateAction<boolean>>;
   setIsPaymentPopupOpen: Dispatch<SetStateAction<boolean>>;
   totalPrice: number;
-  setTotalPrice: Dispatch<SetStateAction<number>>;
 }) {
-  const calculateTotalPrice = () => {
-    let total = 0;
-    products?.forEach((product: SampleProductType) => {
-      let price =
-        product?.pricesObj?.salePrice ?? product?.pricesObj?.regularPrice;
-      total += price;
-    });
-    setTotalPrice(total);
-  };
-
-  useEffect(() => {
-    calculateTotalPrice();
-  }, [products]);
-
   function handlePayments(): void {
     setIsPopupOpen((prev) => !prev);
     setIsPaymentPopupOpen(true);
   }
+  const {clearCart} = useContext(CartContext);
   return (
     <motion.div
       className="absolute max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg shadow-black selection:bg-none z-10 w-96"
@@ -43,7 +28,7 @@ export default function InitiateCheckout({
     >
       <h2 className="text-2xl font-semibold text-gray-800 mb-4">Your Cart </h2>
 
-      {products && products.length > 0 ? (
+      {(products && products.length > 0) ? (
         <div className="space-y-4">
           {products.map((product) => (
             <CartProduct
@@ -71,16 +56,23 @@ export default function InitiateCheckout({
           <div className="flex justify-between items-center mt-2">
             <span className="text-xl font-semibold text-gray-800">Total:</span>
             <span className="text-xl font-bold text-green-900">
-              $ {totalPrice && Math.round(totalPrice + 15)}
+              $ {(totalPrice>0) && Math.round(totalPrice + 15)}
             </span>
           </div>
-
-          <button
-            className="w-full mt-6 bg-green-600 text-white font-semibold py-3 rounded-lg hover:bg-green-700 transition-colors duration-300"
-            onClick={handlePayments}
-          >
-            Checkout
-          </button>
+          <div className="flex justify-between items-center w-full gap-2">
+            <button
+              className="w-full mt-6 bg-red-600 text-white font-semibold py-3 rounded-lg hover:bg-green-700 transition-colors duration-300"
+              onClick={clearCart}
+            >
+              Clear Cart
+            </button>
+            <button
+              className="w-full mt-6 bg-green-600 text-white font-semibold py-3 rounded-lg hover:bg-green-700 transition-colors duration-300"
+              onClick={handlePayments}
+            >
+              Checkout
+            </button>
+          </div>
         </div>
       )}
     </motion.div>

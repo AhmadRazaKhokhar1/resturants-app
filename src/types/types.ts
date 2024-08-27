@@ -1,4 +1,4 @@
-import { MouseEventHandler } from "react";
+import { Dispatch, MouseEventHandler, SetStateAction } from "react";
 
 export type RestaurantCardType = {
   restaurantName: string;
@@ -23,7 +23,7 @@ export type Prices = {
 };
 
 export type SampleProductType = {
-  id:string
+  id: string;
   keyword: string;
   pricesObj: Prices;
   image: string;
@@ -31,18 +31,25 @@ export type SampleProductType = {
 };
 
 export type CartContextType = {
-  items:SampleProductType[],
-  addToCart:(product:SampleProductType)=>void,
-  removeFromCart:(id:string)=>void,
-  cartPopup:(state:boolean, id:string)=>void,
-  isPopupOpen:{
-    id:string,
-    state:boolean
-  },
-  clearCart:()=>void
-}
+  items: SampleProductType[];
+  addToCart: (product: SampleProductType) => void;
+  removeFromCart: (id: string) => void;
+  cartPopup: (state: boolean, id: string) => void;
+  isPopupOpen: {
+    id: string;
+    state: boolean;
+  };
+  clearCart:()=>void,
+};
 
 export type isPopupOpen = {
-  id:string,
-  state:boolean
-}
+  id: string;
+  state: boolean;
+};
+
+export type PaymentForm = {
+  name: string;
+  cvv: number;
+  cardNumber: string;
+  expiryDate: string;
+};
