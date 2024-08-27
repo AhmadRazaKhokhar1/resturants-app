@@ -45,7 +45,7 @@ export default function UserDetailsForm({
         Customer Details
       </h2>
 
-      <form className="space-y-4" onSubmit={handleSubmit}>
+      <div className="space-y-4">
         <div>
           <label
             htmlFor="fullName"
@@ -123,13 +123,13 @@ export default function UserDetailsForm({
         </div>
 
         <button
-          type="submit"
+          onClick={handleSubmit}
           id="go-to-final-checkout"
           className="w-full mt-6 bg-green-600 text-white font-semibold py-3 rounded-lg hover:bg-green-700 transition-colors duration-300"
         >
           Next
         </button>
-      </form>
+      </div>
     </motion.div>
   );
 }

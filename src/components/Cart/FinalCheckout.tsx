@@ -44,7 +44,7 @@ export default function FinalCheckout({
         Payment Details
       </h2>
 
-      <form className="space-y-4">
+      <div className="space-y-4">
         <div>
           <label
             htmlFor="cardNumber"
@@ -122,7 +122,7 @@ export default function FinalCheckout({
             Pay Now
           </button>
         </div>
-      </form>
+      </div>
     </motion.div>
   );
 }
