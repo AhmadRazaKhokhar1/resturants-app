@@ -18,13 +18,10 @@ const MapComponent = () => {
     alt: null,
   });
 
-  const [restaurantsMapCenter, setRestaurantsMapCenter] = useState<
-    any[]
-  >([]);
+  const [restaurantsMapCenter, setRestaurantsMapCenter] = useState<any[]>([]);
 
   const defaultMapZoom = 15;
-  const [autoComplete, setAutoComplete] =
-    useState<any>(null);
+  const [autoComplete, setAutoComplete] = useState<any>(null);
   const mapRef = useRef<google.maps.Map | null>(null);
   const [placesService, setPlacesService] =
     useState<google.maps.places.PlacesService | null>(null);
@@ -184,6 +181,9 @@ const MapComponent = () => {
           />
         ))}
       </GoogleMap>
+      {restaurantsMapCenter.length >= 1 &&<h2 className="mx-auto my-5 text-center font-extrabold text-2xl font-serif text-green-600">
+        Restaurants
+      </h2>}
       <div className="restaurant-cards flex flex-wrap gap-2 my-2 items-center justify-center">
         {restaurantsMapCenter.length >= 1 ? (
           restaurantsMapCenter.map((restaurant, index) => {
