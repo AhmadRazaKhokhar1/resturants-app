@@ -1,4 +1,4 @@
-import { Dispatch, MouseEventHandler, SetStateAction } from "react";
+import {  MouseEventHandler } from "react";
 
 export type RestaurantCardType = {
   restaurantName: string;
