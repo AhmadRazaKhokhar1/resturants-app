@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/NavBar/Navbar";
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
-import Footer from "@/components/Footer";
+import Footer from "@/components/Footer/Footer";
 import CartProviderContext from "@/providers/cart.context.provider";
 
 export var metadata: Metadata = {

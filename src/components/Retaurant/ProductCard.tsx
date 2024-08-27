@@ -1,5 +1,5 @@
 import Image from "next/image";
-import productPlaceHolder from "../app/assets/product_placeholder.png";
+import productPlaceHolder from "../../app/assets/product_placeholder.png";
 
 export default function ProductCard({
   headline,

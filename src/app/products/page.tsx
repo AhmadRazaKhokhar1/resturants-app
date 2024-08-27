@@ -3,9 +3,9 @@ import { useContext, useEffect, useState } from "react";
 import { GenerateSampleProducts } from "../globals/sample-products";
 import { SampleProductType } from "@/types/types";
 import { randomIndexGenerator } from "../globals/callbacks";
-import ProductCard from "@/components/ProductCard";
+import ProductCard from "@/components/Retaurant/ProductCard";
 import { MdBusiness, MdNearMe, MdPerson, MdStar } from "react-icons/md";
-import AddToCartPopup from "@/components/CartPopup";
+import AddToCartPopup from "@/components/Cart/CartPopup";
 import { CartContext } from "../contexts/cart.context";
 export default function Products({
   searchParams,

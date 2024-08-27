@@ -1,6 +1,6 @@
 import { isPopupOpen, SampleProductType } from "@/types/types";
 import Image from "next/image";
-import productPlaceHolder from "../app/assets/product_placeholder.png";
+import productPlaceHolder from "../../app/assets/product_placeholder.png";
 
 interface AddToCartInterface {
   products: SampleProductType[];

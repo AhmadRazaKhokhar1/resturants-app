@@ -1,16 +1,15 @@
 "use client";
-import { TbCurrentLocation } from "react-icons/tb";
 import {
   defaultMapContainerStyle,
   defaultMapOptions,
 } from "@/app/globals/global-vars";
 import * as GoogleMapTypes from "@/types/global-types";
-import { Autocomplete, GoogleMap, MapState, Marker } from "@react-google-maps/api";
+import { Autocomplete, GoogleMap, Marker } from "@react-google-maps/api";
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
-import ResturantCard from "./ResturantCard";
+import ResturantCard from "../Retaurant/ResturantCard";
 import AutoCompleteDropDown from "./AutoCompleteDropDown";
-import { ImSpinner, ImSpinner10, ImSpinner11, ImSpinner2 } from "react-icons/im";
+import {ImSpinner2 } from "react-icons/im";
 
 const MapComponent = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)

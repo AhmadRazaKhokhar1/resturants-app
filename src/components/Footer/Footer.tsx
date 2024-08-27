@@ -1,6 +1,6 @@
 import { FaGithub, FaLinkedin } from 'react-icons/fa'; // Import specific icons from react-icons
 import { HiMail, HiPhone } from 'react-icons/hi';
-import LogoMain from "./LogoMain";
+import LogoMain from "../Logo/LogoMain";
 
 export default function Footer() {
   return (

@@ -1,5 +1,5 @@
 import { SampleProductType } from "@/types/types";
-import placeHolderImage from "../app/assets/product_placeholder.png";
+import placeHolderImage from "../../app/assets/product_placeholder.png";
 import Image from "next/image";
 import { motion } from "framer-motion";
 

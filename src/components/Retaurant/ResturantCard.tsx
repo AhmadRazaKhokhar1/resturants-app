@@ -1,7 +1,7 @@
 import { RestaurantCardType } from "@/types/types";
 import React from "react";
 import { MdStar } from "react-icons/md";
-import product_placeholder from "../app/assets/product_placeholder.png";
+import product_placeholder from "../../app/assets/product_placeholder.png";
 import Link from "next/link";
 import Image from "next/image";
 export default function ResturantCard({

@@ -39,7 +39,7 @@ export type CartContextType = {
     id: string;
     state: boolean;
   };
-  clearCart:()=>void,
+  clearCart: () => void;
 };
 
 export type isPopupOpen = {
@@ -52,4 +52,8 @@ export type PaymentForm = {
   cvv: number;
   cardNumber: string;
   expiryDate: string;
+  fullName: string;
+  address: string;
+  phone: string;
+  email: string;
 };

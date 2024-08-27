@@ -1,12 +1,12 @@
 "use client";
 import Link from "next/link";
-import LogoMain from "./LogoMain";
+import LogoMain from "../Logo/LogoMain";
 import { FaCartShopping } from "react-icons/fa6";
 import { MdPerson3 } from "react-icons/md";
 import { CartContext } from "@/app/contexts/cart.context";
 import { useContext, useEffect, useState } from "react";
-import InitiateCheckout from "./InitiateCheckout";
-import FinalCheckout from "./FinalCheckout";
+import InitiateCheckout from "../Cart/InitiateCheckout";
+import FinalCheckout from "../Cart/FinalCheckout";
 import { SampleProductType } from "@/types/types";
 
 export default function Navbar() {
