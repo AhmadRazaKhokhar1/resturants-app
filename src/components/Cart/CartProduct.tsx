@@ -17,6 +17,7 @@ export default function CartProduct({
           <Image
             src={product?.image}
             alt={product?.headline ?? "Cart Product"}
+            id="product-cart-elment"
             width={100}
             height={100}
             onError={(e) => {
