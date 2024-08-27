@@ -199,7 +199,7 @@ const MapComponent = () => {
                 user_ratings_total={restaurant.userRatings}
                 restaurantName={restaurant.name}
               />
-            );
+            ); 
           })
         ) : (
           <strong>Enter Location To See Nearby Places!</strong>
