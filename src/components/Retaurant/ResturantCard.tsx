@@ -34,9 +34,9 @@ export default function ResturantCard({
         className="min-w-72 max-w-96 min-h-96 max-h-auto bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1"
         id="restaurant-card"
       >
-        <div className="w-96 h-72 overflow-hidden justify-start items-center">
+        <div className="w-full h-72 overflow-hidden justify-start items-center">
           <Image
-            className="w-full h-full  object-cover"
+            className="w-full h-full object-cover"
             src={photoRefrence}
             width={100}
             height={100}
