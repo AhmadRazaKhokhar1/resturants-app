@@ -1,20 +1,22 @@
 import { CartContext } from "@/app/contexts/cart.context";
 import { PaymentForm } from "@/types/types";
 import { motion } from "framer-motion";
-import {useContext, useState } from "react";
+import { Dispatch, SetStateAction, useContext, useState } from "react";
 import toast from "react-hot-toast";
 
-export default function FinalCheckout({ totalPrice }: { totalPrice: number }) {
+export default function FinalCheckout({
+  totalPrice,
+  setIsPaymentPopupOpen,
+}: {
+  totalPrice: number;
+  setIsPaymentPopupOpen: Dispatch<SetStateAction<boolean>>;
+}) {
   const { clearCart } = useContext(CartContext);
   const [paymentForm, setPaymentForm] = useState<PaymentForm>({
     name: "",
     cvv: 0,
     cardNumber: "",
-    expiryDate: "",
-    fullName: "",
-    address: "",
-    phone: "",
-    email: "",
+    expiryDate: ""
   });
 
   function handleChange(e: any) {
@@ -27,6 +29,7 @@ export default function FinalCheckout({ totalPrice }: { totalPrice: number }) {
 
   function handleSubmit() {
     clearCart();
+    setIsPaymentPopupOpen(false)
     toast.success("Successfully placed the order!");
   }
 
@@ -36,75 +39,16 @@ export default function FinalCheckout({ totalPrice }: { totalPrice: number }) {
       animate={{ y: 50, x: -280 }}
       transition={{ duration: 0.3 }}
     >
-      <h2 className="text-2xl font-semibold text-gray-800 mb-4">Payment Details</h2>
+      <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+        Payment Details
+      </h2>
 
       <form className="space-y-4">
         <div>
-          <label htmlFor="fullName" className="block text-gray-700 font-medium mb-1">
-            Full Name
-          </label>
-          <input
-            id="fullName"
-            type="text"
-            name="fullName"
-            value={paymentForm.fullName}
-            onChange={handleChange}
-            placeholder="John Doe"
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-            required
-          />
-        </div>
-
-        <div>
-          <label htmlFor="address" className="block text-gray-700 font-medium mb-1">
-            Address
-          </label>
-          <input
-            id="address"
-            type="text"
-            name="address"
-            value={paymentForm.address}
-            onChange={handleChange}
-            placeholder="123 Main St, City, State"
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-            required
-          />
-        </div>
-
-        <div>
-          <label htmlFor="phone" className="block text-gray-700 font-medium mb-1">
-            Phone
-          </label>
-          <input
-            id="phone"
-            type="tel"
-            name="phone"
-            value={paymentForm.phone}
-            onChange={handleChange}
-            placeholder="+1 234 567 890"
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-            required
-          />
-        </div>
-
-        <div>
-          <label htmlFor="email" className="block text-gray-700 font-medium mb-1">
-            Email
-          </label>
-          <input
-            id="email"
-            type="email"
-            name="email"
-            value={paymentForm.email}
-            onChange={handleChange}
-            placeholder="example@example.com"
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-            required
-          />
-        </div>
-
-        <div>
-          <label htmlFor="cardNumber" className="block text-gray-700 font-medium mb-1">
+          <label
+            htmlFor="cardNumber"
+            className="block text-gray-700 font-medium mb-1"
+          >
             Card Number
           </label>
           <input
@@ -121,7 +65,10 @@ export default function FinalCheckout({ totalPrice }: { totalPrice: number }) {
 
         <div className="flex space-x-4">
           <div className="w-1/2">
-            <label htmlFor="expiryDate" className="block text-gray-700 font-medium mb-1">
+            <label
+              htmlFor="expiryDate"
+              className="block text-gray-700 font-medium mb-1"
+            >
               Expiry Date
             </label>
             <input
@@ -137,7 +84,10 @@ export default function FinalCheckout({ totalPrice }: { totalPrice: number }) {
           </div>
 
           <div className="w-1/2">
-            <label htmlFor="cvv" className="block text-gray-700 font-medium mb-1">
+            <label
+              htmlFor="cvv"
+              className="block text-gray-700 font-medium mb-1"
+            >
               CVV
             </label>
             <input
@@ -157,7 +107,9 @@ export default function FinalCheckout({ totalPrice }: { totalPrice: number }) {
         <div className="mt-4 border-t pt-4">
           <div className="flex justify-between items-center">
             <span className="text-lg font-medium text-gray-700">Total:</span>
-            <span className="text-lg font-semibold text-gray-900">${Math.round(totalPrice)}</span>
+            <span className="text-lg font-semibold text-gray-900">
+              ${Math.round(totalPrice)}
+            </span>
           </div>
 
           <button

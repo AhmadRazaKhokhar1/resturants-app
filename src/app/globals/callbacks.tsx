@@ -108,6 +108,6 @@ export function generateRandomId(): string {
     const newAlphabet = id[randomIndex];
      shuffledId.push(newAlphabet);
   }
-  const stringId = shuffledId.join("");
+  const stringId = shuffledId.join("") + Date.now() + Math.random()*456213;
   return stringId;
 }

@@ -7,18 +7,18 @@ export default function InitiateCheckout({
   products,
   removeFromCart,
   setIsPopupOpen,
-  setIsPaymentPopupOpen,
+  setIsUserDetailsFormOpen,
   totalPrice,
 }: {
   products: SampleProductType[];
   removeFromCart: (id: string) => void;
   setIsPopupOpen: Dispatch<SetStateAction<boolean>>;
-  setIsPaymentPopupOpen: Dispatch<SetStateAction<boolean>>;
+  setIsUserDetailsFormOpen: Dispatch<SetStateAction<boolean>>;
   totalPrice: number;
 }) {
   function handlePayments(): void {
     setIsPopupOpen((prev) => !prev);
-    setIsPaymentPopupOpen(true);
+    setIsUserDetailsFormOpen(true);
   }
   const {clearCart} = useContext(CartContext);
   return (

@@ -52,8 +52,4 @@ export type PaymentForm = {
   cvv: number;
   cardNumber: string;
   expiryDate: string;
-  fullName: string;
-  address: string;
-  phone: string;
-  email: string;
 };

@@ -22,7 +22,7 @@ export default function ProductCard({
 }) {
 
   return (
-    <div className="max-w-72 mx-h-72 bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1" key={id + Math.random()*1000000}>
+    <div className="max-w-72 mx-h-72 bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1" key={id}>
       <div className="relative">
         <Image
           className="max-w-72 object-cover max-h-52"

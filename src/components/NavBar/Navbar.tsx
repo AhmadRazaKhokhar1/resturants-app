@@ -8,10 +8,13 @@ import { useContext, useEffect, useState } from "react";
 import InitiateCheckout from "../Cart/InitiateCheckout";
 import FinalCheckout from "../Cart/FinalCheckout";
 import { SampleProductType } from "@/types/types";
+import UserDetailsForm from "../Cart/UserDetailsForm";
 
 export default function Navbar() {
   const { items, removeFromCart } = useContext(CartContext);
-  const [isPaymentPopupOpen, setIsPaymentPopupOpen] = useState<boolean>(false)
+  const [isPaymentPopupOpen, setIsPaymentPopupOpen] = useState<boolean>(false);
+  const [isUserDetailsFormOpen, setIsUserDetailsFormOpen] =
+    useState<boolean>(false);
   const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
   const [totalPrice, setTotalPrice] = useState<number>(0);
 
@@ -45,9 +48,13 @@ export default function Navbar() {
             >
               <FaCartShopping color="black" size={30} />
             </button>
-            {items?.length === 0 ? "" :<span className="text-white bg-red-700 rounded-full p-1 w-5 h-5 overflow-hidden text-center flex items-center justify-center">
-              {items?.length}
-            </span>}
+            {items?.length === 0 ? (
+              ""
+            ) : (
+              <span className="text-white bg-red-700 rounded-full p-1 w-5 h-5 overflow-hidden text-center flex items-center justify-center">
+                {items?.length}
+              </span>
+            )}
           </div>
           <div className="account">
             <MdPerson3 color="black" size={30} />
@@ -58,14 +65,23 @@ export default function Navbar() {
                 products={items}
                 removeFromCart={removeFromCart}
                 setIsPopupOpen={setIsPopupOpen}
-                setIsPaymentPopupOpen={setIsPaymentPopupOpen}
+                setIsUserDetailsFormOpen={setIsUserDetailsFormOpen}
                 totalPrice={totalPrice}
               />
             )}
           </div>
-          {
-            isPaymentPopupOpen&&<FinalCheckout totalPrice={totalPrice}/>
-          }
+          {isPaymentPopupOpen && (
+            <FinalCheckout
+              totalPrice={totalPrice}
+              setIsPaymentPopupOpen={setIsPaymentPopupOpen}
+            />
+          )}
+          {isUserDetailsFormOpen && (
+            <UserDetailsForm
+              setIsPaymentPopupOpen={setIsPaymentPopupOpen}
+              setIsUserDetailsFormOpen={setIsUserDetailsFormOpen}
+            />
+          )}
         </div>
       </nav>
     </div>
