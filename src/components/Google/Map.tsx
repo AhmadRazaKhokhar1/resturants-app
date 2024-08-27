@@ -9,16 +9,15 @@ import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import ResturantCard from "../Retaurant/ResturantCard";
 import AutoCompleteDropDown from "./AutoCompleteDropDown";
-import {ImSpinner2 } from "react-icons/im";
+import { ImSpinner2 } from "react-icons/im";
 
 const MapComponent = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [defaultMapCenter, setDefaultMapsCenter] =
-    useState<any>({
-      lat: 33.8799866,
-      lng: 71.5048004,
-      alt: null,
-    });
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [defaultMapCenter, setDefaultMapsCenter] = useState<any>({
+    lat: 33.8799866,
+    lng: 71.5048004,
+    alt: null,
+  });
 
   const [restaurantsMapCenter, setRestaurantsMapCenter] = useState<
     GoogleMapTypes.geoLocation[]
@@ -45,7 +44,7 @@ const MapComponent = () => {
         setDefaultMapsCenter({
           lat: location?.lat(),
           lng: location?.lng(),
-          alt:location?.alt()
+          alt: location?.alt(),
         });
       }
     }
@@ -55,7 +54,13 @@ const MapComponent = () => {
   const getCurrentUserLocation = () => {
     try {
       navigator.geolocation.getCurrentPosition(
-        (position:{coords:{latitude:number,longitude:number,altitude:number|null}}) => {
+        (position: {
+          coords: {
+            latitude: number;
+            longitude: number;
+            altitude: number | null;
+          };
+        }) => {
           setDefaultMapsCenter({
             lat: position.coords?.latitude,
             lng: position.coords?.longitude,
@@ -65,7 +70,7 @@ const MapComponent = () => {
             `Your location is marked at Latitude ${position.coords.latitude} and Longitude ${position.coords.longitude}`
           );
         },
-        (failed:any) => {
+        (failed: any) => {
           console.log(failed);
           toast.error(failed.message);
         }
@@ -130,7 +135,7 @@ const MapComponent = () => {
   };
 
   useEffect(() => {
-    setIsLoading(true)
+    setIsLoading(true);
     let newPlacesService;
     if (mapRef.current) {
       newPlacesService = new google.maps.places.PlacesService(mapRef.current);
@@ -144,17 +149,18 @@ const MapComponent = () => {
         getRestaurantsList();
       }, 500);
     }
-    setIsLoading(false)
+    setIsLoading(false);
   }, [placesService]);
   return (
     <div className="w-full">
-      
-        {isLoading&&<ImSpinner2
-        color="green" 
-        size={50} 
-        className="absolute top-1/2 left-1/2 animate-spin" 
-        />}
-        <GoogleMap
+      {isLoading && (
+        <ImSpinner2
+          color="green"
+          size={50}
+          className="absolute top-1/2 left-1/2 animate-spin"
+        />
+      )}
+      <GoogleMap
         mapContainerStyle={defaultMapContainerStyle}
         center={defaultMapCenter}
         zoom={defaultMapZoom}
@@ -181,9 +187,10 @@ const MapComponent = () => {
       </GoogleMap>
       <div className="restaurant-cards flex flex-wrap gap-2 my-2 items-center justify-center">
         {restaurantsMapCenter.length >= 1 ? (
-          restaurantsMapCenter.map((restaurant) => {
+          restaurantsMapCenter.map((restaurant, index) => {
             return (
               <ResturantCard
+                key={index}
                 placeId={restaurant.placeId}
                 business_status={restaurant.businessStatus}
                 isOpen={restaurant.isOpen}
