@@ -24,7 +24,7 @@ export default function InitiateCheckout({
   return (
     <motion.div
       className="absolute max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg shadow-black selection:bg-none z-10 w-96"
-      animate={{ y: 50, x: -400 }}
+      animate={{ y: 50, x: -360 }}
     >
       <h2 className="text-2xl font-semibold text-gray-800 mb-4">Your Cart </h2>
 

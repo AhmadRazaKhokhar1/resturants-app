@@ -36,7 +36,7 @@ export default function FinalCheckout({
   return (
     <motion.div
       className="absolute max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg shadow-gray-500 z-10 w-full md:w-96"
-      animate={{ y: 50, x: -280 }}
+      animate={{ y: 50, x: -235 }}
       transition={{ duration: 0.3 }}
       id="payment-details"
     >
